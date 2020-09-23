@@ -1,0 +1,27 @@
+
+.col-lg-9{
+    border-left:1px solid #E0BDB7; height:100%;
+        }
+
+
+@media( min-width:768px)
+{
+#for_sm{display:none;}
+}
+
+
+@media( max-width:768px)
+{
+#search-input-sm{width:270px; border-radius:24px 0 0 24px ; border:1px solid dimgray; margin-top:20px; border-right:none;}
+#for_bg{display:none;}
+#sidead{ display: none;}
+#widmob{width:100%;}
+#bellicon{font-size:19px; color:black; margin-top:13px;}
+#usericon{font-size:19px; color:black;}
+}
+#navicons{ height:80px; width:100%; padding:15px; border-bottom:1px solid #E0BDB7;}
+#top-icon{font-size:25px; color:dimgray; margin-top:10px;}
+#lasticon{font-size:29px; color:dimgray;}
+#search-input{width:450px; border-radius:24px 0 0 24px ; border:1px solid dimgray; border-right:none;}
+#search-btn{border-radius:0 24px 24px 0 ; border:1px solid dimgray; background-color:bisque;}
+#widmob{ width:100%}

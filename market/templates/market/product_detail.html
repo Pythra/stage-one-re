@@ -1,0 +1,203 @@
+{% extends 'market/base.html' %}
+{% block title %}
+#product-detail{border: 1px ;
+            padding:20px;
+            border-radius:16px;
+            margin-top:10px;
+            -moz-box-shadow: 5px 5px 5px #777777;
+            -webkit-box-shadow: 5px 5px 5px #777777;
+            box-shadow: 4px 4px 4px #FFB9EE, -5px -5px 5px whitesmoke;
+                }
+        #tag{opacity:1.8; color:brown;}
+
+@media( min-width:768px)
+{#postpic {float:left:}}
+
+
+@media( max-width:768px)
+{#postpic {float:center;}
+      #comment{width:100%;}
+        #commenter{font-size:10px;}
+#tag{ font-size:13px;}
+#info{ font-size:13px;}
+#btn{ font-size:13px;}
+      }
+
+#replybtn{float: right;
+    font-weight:bold;
+    margin-right: 10px;
+    font-family:"baloo da 2";
+    color: brown;}
+
+.dp{
+    background-size: cover;
+    height:30pt;width:30pt;
+    margin:0px 5px 3px 3px;
+     float:left;border-radius:50%;
+    -moz-border-radius: 100px;
+    -webkit-border-radius: 100px;}
+
+#postpic{ max-width: auto ; max-height:300px;}
+
+.text-end{float:right;}
+
+#commenter{font-size:20px;
+                margin-left:3px;
+                text-transform:capitalize;
+                 color: brown;}
+
+#comment_box{margin-top:6px;
+                        border:1px solid #C8C8C8;
+                        padding:10px;
+                        border-radius:20px;
+                -moz-box-shadow: 5px 5px 5px #777777;
+                -webkit-box-shadow: 5px 5px 5px #777777;
+                box-shadow: 5px 5px 5px #CBCBCB, -5px -5px 5px whitesmoke;
+      }
+
+#creator{text-transform:uppercase; color: red;}
+
+#combody{ line-height: 1.4em; color:grey;
+                }
+#comicon{font-size:26px; opacity:0.7;}
+#hearticon{font-size:23px; opacity:0.7;}
+#editicon{font-size:26px;  opacity:0.4;}
+#delicon{font-size:26px; opacity:0.4;}
+#comment_time{float: right;font-family:"baloo da 2"}
+  #title{ font-family:"zcool xiaowei"; margin-top:6px; margin-bottom:5px;}
+
+{% endblock %}
+
+{% block content %}
+<center>
+    <img src="{{product.picture.url}}" class="mt-3" style="max-height:380px;">
+    <h5>{{ product.name }}</h5>
+</center>
+<div id="product-detail">
+    <center>
+        <small class="text-muted">PRODUCT DETAILS</small>
+    </center>
+    <table class="table mb-0">
+        <tbody>
+
+                <td id="tag"><b>Price:</b></td>
+                <td id="info">${{ product.price }}</td>
+            <tr>
+                <td id="tag"><b>Product sold at: </b></td>
+                <td id="info">
+                    {{ product.location.area|capfirst }} | {{product.location.LGA|capfirst }} LGA
+                    | {{ product.location.state|capfirst }} state.</td>
+            </tr>
+            <tr>
+                <td id="tag"><b>Store: </b></td>
+                <td  id="info" colspan="mb-0">{{ product.shop }}</td>
+            </tr>
+            <tr>
+                <td id="tag" class="mt-0"><b>Description: </b></td>
+                <td id="info"> {{ product.description }}</td>
+            </tr>
+            <tr>
+                <td id="tag" class="mt-0"><b>Specifications: </b></td>
+                <td id="info">{{ product.specification }}</td>
+            </tr>
+            <tr>
+                <td id="tag" class="mt-0"><b>Quantity in stock: </b> </td>
+                <td id="info">{{ product.quantity }}</td>
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+            </tr>
+        </tbody>
+    </table>
+        {% if product.shop == request.user.shop %}
+            <center>
+            <a href="{% url 'product_update' product.slug %}">
+                <button class="btn btn-sm btn-warning mr-2" style="border-radius: 45px;" id="btn">
+                    <b>Edit product</b>
+                </button>
+            </a>
+            <a href="{% url 'product_confirm_delete' product.slug %}?next={{ request.path}}">
+               <button class="btn btn-sm btn-danger" style="border-radius: 45px; font-weight:500;" id="btn">
+                   Delete item
+               </button>
+            </a>
+            </center>
+        {% endif %}
+</div>
+<div id="product-detail">
+    <center><small class="text-muted">SELLER DETAILS</small></center>
+    <table class="table mb-0">
+        <tbody>
+            <tr>
+                <td id="tag"><b>Store name:</b></td>
+                <td id="info">{{ product.shop.name }}</td>
+            </tr>
+            <tr>
+                <td id="tag"><b>Seller phone number:</b></td>
+                <td id="info">{{ product.shop.phone }}</td>
+            </tr>
+            {% if product.shop.site %}
+            <tr>
+                <td id="tag"><b>Seller website:</b></td>
+                <td id="info">
+                    <a href="{{ product.shop.site }}">
+                        {{ product.shop.site }}
+                    </a>
+                </td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td colspan="2"></td>
+            </tr>
+        </tbody>
+    </table>
+    <center>
+        <a href="{% url 'visit_shop' product.shop.id %}">
+            <button class="btn btn-md" style="background-color:bisque; border-radius:50px;">
+                Contact Seller
+            </button>
+        </a>
+    </center>
+</div>
+
+{% for review in reviews %}
+  {% if forloop.first %}
+    <div class="row">
+  {% endif %}
+<div class="col-lg-6 col-12">
+    <div id="comment_box">
+                <img class="dp" src="{{ review.dp }}">
+                <p id="commenter">{{ review.customer }}
+                <small class="text-muted " id="comment_time"><i class=" fa fa-clock-o"></i> {{ review.created_on }}</small>
+                </p>
+            <hr>
+
+            <p id="combody">{{ review.content }}</p>
+
+<center>
+    <i class="fa fa-heart-o ml-1" id="hearticon" aria-hidden="true"></i>
+
+       {% if user.get_username == review.customer %}
+    <a href="{% url 'review_update' review.pk %}">
+      <i class="fa fa-pencil-square-o ml-5  text-muted"   id="editicon"></i>
+    </a>
+    <a href="{% url 'review_confirm_delete' review.pk %}?next={{ request.path}}">
+      <i class="fa fa-trash-o ml-5  text-muted" aria-hidden="true"  id="delicon"></i>
+    </a>
+    {% endif %}
+</center>
+
+    </div>
+</div>
+{% if forloop.counter|divisibleby:2 %}</div>
+  <div class="row">
+{% endif %}
+{% if forloop.last %}
+</div>
+{% endif %}
+
+{% endfor %}
+ <center><a href="{% url 'review_form' product.slug %}"><small class="text-muted">
+     Bought this product? Click to write a review.
+ </small> </a> </center>
+{% endblock %}

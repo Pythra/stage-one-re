@@ -1,0 +1,13 @@
+{% extends 'market/base.html' %}
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+        <form method="post" enctype = "multipart/form-data">
+          {% csrf_token %}
+            {{ form.as_p }}
+
+            <center><button class="btn btn-info mt-3" type="submit">Submit</button></center>
+        </form>
+{% endblock %}

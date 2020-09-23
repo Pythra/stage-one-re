@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Bootstrap 4 Fluid Layout Example</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Baloo+Da+2" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<style>
+  #navmain{ color: black ; font-size:22px; opacity:0.8; margin-right}
+  .navbar-brand{color:brown ; font-family:Ebrima; margin-left:10px;}
+
+  #sour{color: black; font-family: Candara; font-size:42px; font-weight:500; }
+  #milk{color: brown ;font-family: 'Comic sans ms'; font-weight:600; font-size:37px;}
+  #daily{color: black; font-family: Candara; font-size:40px; font-weight:360;}
+  #cupicon{ font-size:48px; opacity:0.7 width:50px;  color:brown ;}
+#signup{ font-family:"baloo da 2"; color:white; font-weight: 500; font-size:17px;}
+#login{ font-size:17px; color: brown;}
+
+#scroll{color: white ; font-size:20px;font-family:"baloo da 2";}
+ .scrollmenu {
+  background-color: brown; height:31px;
+  overflow: auto; overflow-y: hidden;
+  white-space: nowrap; border-bottom: 1px solid brown; border-top: 1px solid brown;
+}
+
+@media( max-width:768px)
+{
+  #sour{color: black; font-family: "comic sans ms"; font-size:30px; font-weight:500; }
+  #milk{color: brown ;font-family: 'Comic sans ms'; font-weight:600; font-size:31px;}
+  #daily{color: black; font-family: Candara; font-size:30px; font-weight:360;}
+  #cupicon{  font-size:40px; opacity:0.9;  color:brown ;}
+  .navbar-brand{color:brown ; font-family:Ebrima;}
+#scroll{color: white ; font-size:17px;}
+  }
+  </style>
+  </head>
+  <body>
+<nav class="navbar navbar-expand-md navbar-light navbar-custom" style="background-color: bisque;" >
+    <a href="{% url 'home' %}" class="navbar-brand">
+      <i class=" fa fa-coffee mr-0" id="cupicon"></i><span id="sour">Sour</span><span id="milk">Milk</span>
+        <span id="daily" class="ml-1">Daily</span>
+    </a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ml-5">
+            <a href="{% url 'home' %}" class="nav-item nav-link active" id="navmain">Home</a>
+            <a href="{% url 'about'%}" class="nav-item nav-link" id="navmain">About Us</a>
+            <a href="#" class="nav-item nav-link" id="navmain">Upcoming</a>
+            <a href="#" class="nav-item nav-link" id="navmain">Memeverse</a>
+        </div>
+        <div class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+            <a href="{% url 'logout'%}?next={{ request.path}}" class="nav-item nav-link btn btn-sm btn-outline-dark" >Logout</a>
+            {% else %}
+
+            <a href="{% url 'login'%}?next={{ request.path}}" class="nav-item nav-link btn btn-sm" id="login">Login</a>
+            <a href="{% url 'signup'%}" class="nav-item nav-link text-muted">
+                <button class="btn btn-secondary btn-sm"><span id="signup">Sign up</span></button></a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+<div class="scrollmenu mx-auto">
+<center>
+  <a href="#" id="scroll" class="mx-3">News</a>
+    <a href="{% url 'home' %}" id="scroll" class="mx-3 ">Blog</a>
+  <a href="{% url 'market_home' %}" id="scroll" class="mx-3">Market</a>
+  <a href="#about" id="scroll" class="mx-3">Votallion</a>
+  <a href="#home" id="scroll" class="mx-3">Library</a>
+  <a href="#news " id="scroll" class="mx-3">Milkademy</a>
+  <a href="#news " id="scroll" class="mx-3">Kitchen</a>
+</center>
+</div>
+</body>
+
+</html>

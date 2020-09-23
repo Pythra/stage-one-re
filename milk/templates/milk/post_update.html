@@ -1,0 +1,11 @@
+{% extends 'milk/base.html' %}
+{% block title %}
+{% endblock %}
+{% block content %}
+  <h1>Update Post</h1>
+
+<form action="" method="POST" class="form-group">
+  {% csrf_token %}
+  <input type="submit" class="form-control" value="Update">
+</form>
+{% endblock %}

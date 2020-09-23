@@ -1,0 +1,67 @@
+<style>
+       #sser-box{border: none;
+            max-height:210px; width:100%;
+             padding-top:3px;
+            border-radius:16px;
+            -moz-box-shadow: 5px 5px 5px #777777;
+            -webkit-box-shadow: 5px 5px 5px #777777;
+            box-shadow: 5px 5px 5px #FFC58B, inset 5px 5px 7px #D6D6D6;
+                }
+    #serlistpic{max-height:59px;}
+#picscroll {
+  white-space: nowrap;
+}
+       </style>
+       {% block searched_services %}
+
+  {% if forloop.first %}
+    <div class="row">
+  {% endif %}
+  <div class="col-lg-6 col-12">
+    <div id="sser-box"  class="mb-3">
+        <center>
+        <small>
+            <b style="color: brown; margin:1px 0 3px 0">{{ service.name }}</b><br>
+            {% if service.pic1 or service.pic2 or service.pic3 or service.pic4 %}
+        <span id="picscroll">
+             {% if service.pic1 %}
+                <img src="{{ service.pic1.url }}" id="serlistpic">
+            {% endif %}
+             {% if service.pic2 %}
+                <img src="{{ service.pic2.url }}" id="serlistpic">
+            {% endif %}
+             {% if service.pic3 %}
+                <img src="{{ service.pic3.url }}" id="serlistpic">
+            {% endif %}
+             {% if service.pic4 %}
+                <img src="{{ service.pic4.url }}" id="serlistpic">
+            {% endif %}
+        </span>
+            {% else %}
+                <span id="for_bg" class="text-muted">{{ service.description|slice:":144" }}....</span>
+                <span id="for_sm" style="margin: 1px 3px 1px 3px;">{{ service.description|slice:":125" }}</span>
+            {% endif %}
+        </small>
+            <br>
+            <div style="background-color:bisque; border-radius:0 0 8px 8px; width:100%;" class="mt-2">
+                <small>
+            <span class="mr-3 ml-5">
+                <b>Area: </b>{{ service.shop.location|capfirst }}
+            </span>
+            <b >Charge: </b>${{ service.charge }}
+            <a href="{% url 'service_detail' service.slug %}" id="more" style="float:right" class="mr-2">
+                read more
+            </a>
+                </small>
+            </div>
+    </center>
+    </div>
+    </div>
+{% if forloop.counter|divisibleby:2 %}
+    </div>
+  <div class="row">
+{% endif %}
+{% if forloop.last %}
+</div>
+{% endif %}
+{% endblock searched_services %}

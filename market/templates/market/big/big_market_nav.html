@@ -1,0 +1,33 @@
+
+{% block big_market_nav %}
+        <div id="navicons" >
+            <center>
+            <ul class="list-inline">
+                <li class="list-inline-item mr-5">
+                    <a href="{% url 'my_shop' %}">
+                        <i class="fa fa-user-circle-o mr-5" id="top-icon" ></i>
+                    </a>
+                </li>
+                <li class="list-inline-item mr-5">
+                        <i class="fa fa-envelope-o" id="top-icon"></i>
+                </li>
+
+    <li class="list-inline-item mr-5 mb-3">
+<form action="{% url 'search_home' %}" method="get">
+        <input type="text" name="q" id="search-input" placeholder="    search for a product or service"><button id="search-btn">
+           <i class="fa fa-search" style="color:brown;"></i>
+    </button>
+</form>
+    </li>
+                <li class="list-inline-item mr-5">
+                    <i class="fa fa-bell-o" id="top-icon"></i>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#">
+                        <i class="fa fa-gear" id="lasticon"></i>
+                    </a>
+                </li>
+            </ul>
+            </center>
+        </div>
+{% endblock %}

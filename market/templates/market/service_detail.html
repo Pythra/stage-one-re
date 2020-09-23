@@ -1,0 +1,119 @@
+{% extends 'market/base.html' %}
+{% block title %}
+#product-detail{border: 1px ;
+            padding:20px;
+            border-radius:16px;
+            margin-top:10px;
+            -moz-box-shadow: 5px 5px 5px #777777;
+            -webkit-box-shadow: 5px 5px 5px #777777;
+            box-shadow: 4px 4px 4px bisque, -5px -5px 5px whitesmoke;
+                }
+        #tag{opacity:1.8; color:brown;}
+.picscroll {
+  overflow: auto; overflow-y: hidden;
+  white-space: nowrap;
+}
+
+@media( max-width:768px)
+{#postpic {float:center;}
+      #comment{width:100%;}
+        #commenter{font-size:10px;}
+#tag{ font-size:13px;}
+#info{ font-size:13px;}
+      }
+
+{% endblock %}
+
+{% block content %}
+<center>
+    <h6 class="my-3">{{ service.name }}</h6>
+<div class="picscroll mx-auto">
+             {% if service.pic1 %}
+                <img src="{{ service.pic1.url }}">
+            {% endif %}
+             {% if service.pic2 %}
+                <img src="{{ service.pic2.url }}">
+            {% endif %}
+             {% if service.pic3 %}
+                <img src="{{ service.pic3.url }}">
+            {% endif %}
+             {% if service.pic4 %}
+                <img src="{{ service.pic4.url }}">
+            {% endif %}
+</div>
+</center>
+<div id="product-detail">
+    <center>
+        <small class="text-muted">SERVICE DETAILS</small>
+    </center>
+    <table class="table mb-0">
+        <tbody>
+            <tr>
+                <td id="tag"><b>Charge:</b></td>
+                <td id="info">${{ service.charge }}</td>
+            </tr>
+            <tr>
+                <td id="tag"><b>Product sold at: </b></td>
+                <td id="info">{{ service.location.area }} | {{service.location.LGA }} | {{ service.location.state }}</td>
+            </tr>
+            <tr>
+                <td id="tag"><b>Establishment: </b></td>
+                <td  id="info" colspan="mb-0">{{ service.buisnessprofile }}</td>
+            </tr>
+            <tr>
+                <td id="tag" class="mt-0"><b>Description: </b></td>
+                <td id="info"> {{ service.description }}</td>
+            </tr>
+            <tr>
+                <td id="tag" class="mt-0"><b>Experience: </b></td>
+                <td id="info">{{ service.experience }}</td>
+            </tr>
+            <tr>
+                <td id="tag" class="mt-0"><b>Qualifications: </b></td>
+                <td id="info"> {{ service.qualifications }}</td>
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+            </tr>
+        </tbody>
+    </table>
+    <center>
+        {% if service.shop == request.user.shop %}
+            <a href="{% url 'service_update' service.slug %}">
+                <button class="btn btn-md btn-warning mr-2" style="border-radius: 45px; font-weight:500;">
+                    Edit service
+                </button>
+            </a>
+            <a href="{% url 'service_confirm_delete' service.slug %}?next={{ request.path}}">
+                <button class="btn btn-md btn-danger" style="border-radius: 45px; font-weight:500;">
+                    Delete service
+                </button>
+            </a>
+        {% endif %}
+    </center>
+</div>
+<div id="product-detail">
+    <center><small class="text-muted">SELLER DETAILS</small></center>
+    <table class="table mb-0">
+        <tbody>
+            <tr>
+                <td id="tag"><b>Establishment: </b></td>
+                <td  id="info" colspan="mb-0">{{ service.shop }}</td>
+            </tr>
+            <tr>
+                <td id="tag" class="mt-0"><b>Phone number: </b></td>
+                <td id="info">{{ service.shop.phone }}</td>
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+            </tr>
+        </tbody>
+    </table>
+    <center>
+    <button class="btn btn-md" style="background-color:bisque; border-radius: 45px; font-weight:500;">
+        Contact Seller
+    </button>
+    </center>
+</div>
+{% endblock %}
+

@@ -1,0 +1,16 @@
+{% extends 'milk/base.html' %}
+{% block title %}
+#compost{font-family:"zcool xiaowei";}
+{% endblock %}
+{% block content %}
+<h4 id="compost">{{post.title}}</h4>
+<hr>
+<blockquote></blockquote>
+<h3>Leave a comment</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form}}
+    <button type="submit" class="btn btn-md btn-danger btn-mobile-wide my-3">Post Comment</button>
+</form>
+
+{% endblock %}

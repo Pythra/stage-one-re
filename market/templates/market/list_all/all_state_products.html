@@ -1,0 +1,10 @@
+{% extends 'market/base.html' %}
+{% block title %}
+{% endblock %}
+{% block content %}
+
+{% for product in state_products %}
+{{ product.name }}
+{% endfor %}
+
+{% endblock %}

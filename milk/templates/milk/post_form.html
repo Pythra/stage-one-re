@@ -1,0 +1,21 @@
+{% extends 'milk/base.html' %}
+{% block title %}
+.title{margin-bottom: 8px;}
+#choose{ margin-top:4px;}
+{% endblock %}
+{% block content %}
+<h2 class="my-4">Create A Post</h2>
+      <form action="" method="post" class="form-group" enctype="multipart/form-data">
+    {% csrf_token %}
+
+          <div class="form-group">
+              {{ form.title }}
+              <div class="invalid-feedback">Enter valid text for post headline</div>
+          </div>
+         {{ form.content }}
+              <span id="choose">{{ form.post_pic }}</span>
+          <p >
+              <button type="submit" class="btn btn-md btn-danger my-3" id="widmob">Create</button>
+          </p>
+      </form>
+{% endblock %}

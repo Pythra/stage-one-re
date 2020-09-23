@@ -1,0 +1,10 @@
+{% extends 'market/base.html' %}
+{% block title %}
+{% endblock %}
+{% block content %}
+
+{% for service in services %}
+{{ service.name }}
+{% endfor %}
+
+{% endblock %}

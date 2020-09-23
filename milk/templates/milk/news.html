@@ -1,0 +1,80 @@
+{% extends 'milk/base.html' %}
+{% block title %}
+#more{float: right; color: brown;
+    margin-right: 10px;
+    font-family:"baloo da 2"; opacity:0.9;
+    font-size:12pt}
+
+#commicon{ font-size:15pt; margin-left: 12px; color:brown;}
+#post_title{ opacity:0.9;}
+#post_info{font-size:10pt}
+ul{ list-style: none;}
+
+#creator{
+    font-family:"baloo da 2";
+    color: gray; opacity:0.8;
+    font-size:14pt;
+    max-width:40px;}
+
+
+@media( min-width:768px)
+{#post_pic{width:90px; max-height:90px; float:left;
+    margin-right: 8px;
+        }}
+
+
+@media( max-width:768px)
+{
+#date{display: none;}
+        }
+
+#date{ float: right; color:gray; font-size:22px; font-family:"baloo da 2";}
+
+#postpic{width:60px; max-height:60px; float:left;
+    margin-right: 8px;}
+{% endblock %}
+{% block content %}
+<center>
+  <h3 class="mt-2" >
+     {% if user.is_authenticated %}
+    <a href="{% url 'profile_detail' request.user.id %}">
+            <i id="prosm" class="fa fa-user-circle-o mt-1 ml-1" style="font-size:24pt;"></i>{% endif %}
+    </a>
+      <i class="fa fa-newspaper-o"></i>
+      <span class="mt-2" style="font-size:34px; font-family:'zcool xiaowei'; color:brown;">Latest News</span>
+      {% for post in user_posts %}
+{{ post.title }}
+        {% endfor %}
+
+      <span id="date" class="mt-4">{{current_date | date:"D d M Y"}}</span></h3>
+  </center>
+<hr>
+{% for post in posts %}
+<ul class="">
+    <li class="" id="">
+        {% if post.post_pic %}
+        <img src="{{ post.post_pic.url}}"  id="postpic">
+        <h5 id="post_title" class="mb-1">{{ post.title }}</h5>
+    <p class="text-muted mt-3">
+        <i class="fa fa-comments-o " id="commicon">
+            <sup><small class="text-danger">{{ post.comments.count }}</small></sup>
+        </i>
+        <i class="fa fa-eye " id="commicon"></i>
+        <a href="{% url 'post_detail' post.slug %}" id="more">read more</a>
+    </p>
+        {% else %}
+
+        <h5 id="post_title">{{ post.title }}</h5>
+    <p class="text-muted mt-1">
+        <i class="fa fa-comments-o" id="commicon"><sup>
+            <small class="text-danger">{{ post.comments.count }}</small>
+        </sup></i>
+        <i class="fa fa-eye " id="commicon"></i>
+ <a href="{% url 'post_detail' post.slug %}" id="more">read more</a></p>
+        {% endif %}
+
+        <hr>
+    </li>
+</ul>
+{% endfor %}
+{% endblock %}

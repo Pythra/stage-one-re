@@ -1,0 +1,75 @@
+{% block small_carousel %}
+ {% load static %}
+
+<center>
+<div id="carouselExampleControls" class="carousel slide my-5" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+        <div id="carousel-card-sm" style="background-color:deeppink">
+            <div>
+            <img  id="car-pic-sm" src=" {% static 'market/smileboy.jpg' %}">
+            </div>
+            <div id="car-text-sm">
+                <p class="text-center">
+                    <b>Buy and sell your products<br>
+                        Render your services on MilkMarket</b>
+                </p>
+                <center>
+                     <a href="{% url 'product_form' %}" >
+                         <button class="btn btn-sm btn-warning" style="border-radius:46px;">
+                            <b>Get started</b>
+                        </button>
+                     </a>
+                </center>
+            </div>
+
+        </div>
+    </div>
+    <div class="carousel-item">
+        <div id="carousel-card-sm" style="background-color:#BDE7C8;">
+            <div>
+                <img  id="car-pic-sm" src=" {% static 'market/smileboy.jpg' %}">
+            </div>
+            <div id="car-text-sm">
+                <p  class="text-center text-dark ">
+                    <b>
+                        Learnt a new skill?<br>
+                        Let your neighbors know about it<br>
+                    </b>
+                </p>
+                    <button class="btn btn-info btn-sm" style="border-radius:50px;">
+                        Get started
+                    </button>
+            </div>
+        </div>
+    </div>
+    <div class="carousel-item">
+        <div id="carousel-card-sm" style="background-color:#DBD1B3">
+            <div>
+                <img  id="car-pic-sm" src=" {% static 'market/smileboy.jpg' %}">
+            </div>
+            <div id="car-text-sm">
+                <p  class="text-center text-dark ">
+                    <b>
+                        Learnt a new skill?<br>
+                        Let your neighbors know about it<br>
+                    </b>
+                </p>
+                    <button class="btn btn-info btn-sm" style="border-radius:50px;">
+                        Get started
+                    </button>
+            </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+</center>
+
+{% endblock %}

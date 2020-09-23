@@ -1,0 +1,54 @@
+<style>
+#legend{ width:40%; height:23px; border:none; background-color:brown; color:white; border-radius:15px 15px 0 0;
+               padding-bottom:2px;}
+
+    #req-pic{margin-top:4px;
+       height:34px; width:34px;
+        border-radius:50%;
+       background-repeat:no-repeat;
+       background-size:cover;
+       }
+       .lh{ display:block; line-height:20px;}
+       </style>
+       {% block request_list %}
+<center>
+    <div id="legend">
+        <span style="letter-spacing:1px; font-weight:500; font-size:14px; ">REQUESTS</span>
+    </div>
+</center>
+<div style=" padding:-top:4px;">
+      <ul class="list-group">
+        {% for req in requests %}
+      <li class="list-group-item" style="border:1px dashed brown;">
+          <div id="req-pic" style="background-image:url('{{ req.shop.establishment_pic.url }}'); float:left;">
+          </div>
+          <div  class="lh">
+          <a href="{% url 'visit_shop' req.shop.id %}">
+          <span style="margin-left:5px; font-size:13px; color:black;">{{ req.shop.name }}</span>
+          </a>
+             <span style="float:right; font-size:13px; color:grey;">
+                  <i class="fa fa-clock-o"></i>
+                 <span style=" font-size:12px; color:grey; ">{{ req.created_on|timesince }}</span>
+             </span><br>
+          <span style="margin-left:5px; font-size:12px; color:grey;">
+              {{ req.shop.location.area|capfirst }} | {{ req.shop.location.state|capfirst }} state
+          </span>
+              <hr>
+        <center>
+            <span style=" font-size:12px; font-weight: 700; color:brown;">{{ req.title|upper }}</span><br>
+             <span style=" font-size:12px;">{{ req.description|slice:":95" }}</span><br>
+            <div style="background-color:bisque; width:70%; height:24px; border:none; border-radius:30px; margin-top:5px;" >
+                <span style="font-size:12px;" >
+                    <b>BUDGET: </b>&#8358;{{ req.min_price }} - &#8358;{{ req.max_price }}
+                </span>
+            </div>
+        </center>
+          </div>
+      </li>
+        {% endfor %}
+      </ul>
+    <center>
+    <a href="{% url 'request_form' %}"><small class="text-muted my-2">Need something? Click here to make a request.</small></a>
+    </center>
+</div>
+{% endblock %}

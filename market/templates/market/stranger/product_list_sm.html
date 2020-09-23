@@ -1,0 +1,56 @@
+<style>
+    #pro-pic-sm{
+       height:104px; width:104px;
+        border:1px; border-radius:13px 13px 0px 0px;
+       margin-top:0px;  background-repeat:no-repeat;
+       background-size:104px;
+       }
+
+
+       #box-sm{border: 1px ;
+            max-height:180px; max-width:105px; overflow:scroll;
+            padding:0px;
+            border-radius:13px;
+            margin-top:13px;
+            -moz-box-shadow: 5px 5px 5px #777777;
+            -webkit-box-shadow: 5px 5px 5px #777777;
+            box-shadow: 4px 4px 5px #FFC58B, -5px -5px 5px whitesmoke;
+                }
+</style>
+    {% block product_list_sm %}
+  {% if forloop.first %}
+    <div class="row">
+  {% endif %}
+
+  <div class="col-4">
+      <center>
+        <div id="box-sm">
+            <div id="pro-pic-sm" style="background-image:url('{{ product.pic1.url }}')" data-toggle="modal" data-target="#modal{{ product.id }}"></div>
+            <small id="product_info">
+                <strong style="color:brown; white-space:nowrap;">{{ product.name }}</strong><br>
+                <span style="white-space:nowrap; width:105px;" class="text-muted">
+                    ${{ product.price }} | {{ product.shop.location }}
+                </span><br>
+                <a href="{% url 'product_detail' product.slug %}" id="more">read more</a>
+            </small>
+        </div>
+      </center>
+  </div>
+{% if forloop.counter|divisibleby:3 %}
+    </div>
+
+  <div class="row">
+{% endif %}
+{% if forloop.last %}
+</div>
+    {% endif %}
+{% endblock %}
+<!-- Modal -->
+<div class="modal fade" id="modal{{ product.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    <img src="{{product.picture.url}}"  style="max-width:100%">
+
+    </div>
+  </div>
+</div>

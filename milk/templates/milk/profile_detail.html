@@ -1,0 +1,141 @@
+{% extends 'milk/base.html' %}
+{% block title %}
+
+        #box{ height: auto;background-color: white;
+                width: 340px;
+                border: 0 1px 1px 0 solid grey;
+                border-radius: 20px 20px 20px 20px;
+                padding: 5px;
+                -moz-box-shadow: 5px 5px 5px #777777;
+                -webkit-box-shadow: 5px 5px 5px #777777;
+                box-shadow: 5px 5px 5px #777777, -5px -5px 5px whitesmoke;
+                margin-top:30px;}
+
+          #followbtn{ float:right; }
+
+@media( max-width:768px){
+        #box{ width:320px; }}
+
+          #prodp{max-height: auto;
+                        max-width: 100%;
+                   border: 2px solid gold;
+                        border-radius: 50%;
+                   margin-top:10px; margin-bottom:10px;}
+
+        #tag{  font-weight:600; opacity:1.8;}
+
+
+        #icons{ float:center;}
+          #social{ font-size:18pt; color:brown; margin:0px 0px 0px 7px;}
+
+          em{ float: center;}
+
+
+ .fa-pencil-square-o{ color: grey; float:right;}
+
+
+          .tag{ border:none; background-color: ; width:100%}
+
+          #bio{color:grey;}
+          #info{  color:brown; font-size:13pt; font-weight:600;}
+
+ 
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col col-lg-4 mb-3">
+
+  <h3 class="mt-2" style="font-family:'zcool xiaowei';color:maroon;">
+        <i class="fa fa-user-o"></i> My Profile  </h3>
+        <hr>
+    <div id="box" class="">
+        <div class="container-fluid">
+        <div class="container">
+                     <center>
+                         <h5>{{ request.user }}</h5>
+                     </center>
+                 <center>
+                        <img id="prodp" src="{{ request.user.profile.dp.url }}" class="mx-auto">
+                 </center>
+            <a href="{% url 'profile' %}" >
+            <i class="fa fa-pencil-square-o" style="font-size:21pt;"></i>
+            </a>
+    </div>
+    </div>
+        <div class="tag">
+            <table class="table mb-0">
+            <tbody>
+            <tr>
+                <td id="tag">Name:</td>
+                <td id="info">{{ request.user.profile.first_name }} {{ request.user.profile.last_name }}</td>
+            </tr>
+            <tr>
+                <td id="tag">Gender:</td>
+                <td id="info">{{ request.user.profile.gender }}</td>
+            </tr>
+            <tr>
+                <td id="tag">Age:</td>
+                <td  id="info" colspan="mb-0"> {{ request.user.profile.age}}</td>
+            </tr>
+            <tr>
+                <td id="tag" class="mt-0">Email:</td>
+                <td id="info">{{ request.user.email }} </td>
+            </tr>
+            <tr>
+                <td id="tag" class="mt-0">Location:</td>
+                <td id="info">{{ request.user.profile.country }} </td>
+            </tr>
+            <tr>
+                <td colspan="2"></td>
+            </tr>
+            </tbody>
+            </table>
+        </div>
+        <div>
+            <center>
+            <small id="bio" class="mt-0">
+            </small></center>
+
+            <center class="mb-0 mt-1"><small>{{ request.user.profile.bio }}<br>
+                <i class="text-dark">Member since </i><b class="text-dark" style="opacity:1.8"> {{ request.user.profile.joined }}</b></small>
+            </center>
+            <hr class="mt-0">
+        </div>
+            <center>
+                <div id="icons " class="mt-2">
+                    {% if request.user.profile.twitter %}
+                    <a href="https://twitter.com/{{request.user.profile.twitter}}">
+                        <i class=" fa fa-twitter " id="social"></i>
+                    </a>
+                    {% endif %}
+                    <a href="{{request.user.email}}">
+                        <i class="fa fa-envelope-o" id="social" ></i>
+                    </a>
+                    {% if request.user.profile.facebook %}
+                    <a href="{{request.user.profile.facebook}}">
+                        <i class="fa fa-facebook" id="social"></i>
+                    </a>
+                    {% endif %}
+                    {% if request.user.profile.linkedin %}
+                    <a href="{{request.user.profile.linkedin}}">
+                        <i class=" fa fa-linkedin" id="social" ></i>
+                    </a>
+                    {% endif %}
+                    {% if request.user.profile.instagram %}
+                    <a href="{{request.user.profile.instagram}}">
+                        <i class=" fa fa-instagram" id="social" ></i>
+                    </a>
+                    {% endif %}
+                </div>
+            </center>
+    </div>
+    </div>
+    <div class="col-lg-4">
+        <div id="round">
+
+        </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

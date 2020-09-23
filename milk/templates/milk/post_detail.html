@@ -1,0 +1,116 @@
+{% extends 'milk/base.html' %}
+{% block title %}
+@media( min-width:768px)
+{#postpic {float:left:}}
+@media( max-width:768px)
+{#postpic {float:center;}
+      #comment{width:100%;}
+        #commenter{font-size:10px;}
+      }
+
+#replybtn{float: right;
+    font-weight:bold;
+    margin-right: 10px;
+    font-family:"baloo da 2";
+    color: brown;}
+
+.dp{
+    background-size: cover;
+    height:30pt;width:30pt;
+    margin:0px 5px 3px 3px;
+     float:left;border-radius:50%;
+    -moz-border-radius: 100px;
+    -webkit-border-radius: 100px;}
+
+#postpic{ max-width: auto ; max-height:300px;}
+
+.text-end{float:right;}
+
+#commenter{font-size:20px;
+                margin-left:3px;
+                text-transform:capitalize;
+                 color: brown;}
+
+#comment_box{margin-top:6px;
+                        border:1px solid #C8C8C8;
+                        padding:10px;
+                        border-radius:20px;
+                -moz-box-shadow: 5px 5px 5px #777777;
+                -webkit-box-shadow: 5px 5px 5px #777777;
+                box-shadow: 5px 5px 5px #CBCBCB, -5px -5px 5px whitesmoke;
+      }
+
+#creator{text-transform:uppercase; color: red;}
+
+#combody{ line-height: 1.4em; color:grey;
+                }
+#comicon{font-size:26px; opacity:0.7;}
+#hearticon{font-size:23px; opacity:0.7;}
+#editicon{font-size:26px;  opacity:0.4;}
+#delicon{font-size:26px; opacity:0.4;}
+#comment_time{float: right;font-family:"baloo da 2"}
+  #title{ font-family:"zcool xiaowei"; margin-top:6px; margin-bottom:5px;}
+
+{% endblock %}
+{% block content %}
+  {% load static %}
+<div class="container">
+    <h2 class="text-left" id="title">{{ post.title }}</h2>
+<p>
+    By <b id="creator">{{ post.creator }}  </b><small class="text-muted ml-3"><i class=" fa fa-calendar"></i> {{ post.created_on }}</small>
+</p>
+<hr>
+<blockquote>
+    <p>{{ post.content }}</p>
+    {% if post.post_pic %}
+      <img src="{{ post.post_pic.url }}" id="postpic">
+      <hr>
+    {% endif %}
+</blockquote>
+</div>
+<div class="container-fluid">
+{% for comment in comments %}
+  {% if forloop.first %}
+    <div class="row">
+  {% endif %}
+<div class="col-lg-6">
+    <div id="comment_box">
+                <img class="dp" src="{{ comment.dp }}">
+                <p id="commenter">{{ comment.name }}
+                <small class="text-muted " id="comment_time"><i class=" fa fa-clock-o"></i> {{ comment.created_on }}</small>
+                </p>
+            <hr>
+
+            <p id="combody">{{ comment.body }}</p>
+
+<center>
+    <i class="fa fa-heart-o ml-1" id="hearticon" aria-hidden="true"></i>
+
+        <a href="{{comment.get_absolute_url}}">
+            <i class="fa fa-comments-o ml-5 text-muted"  id="comicon"><sup><small>{{comment.replies.count}}</small></sup></i>
+        </a>
+       {% if user.get_username == comment.name %}
+    <a href="{% url 'comment_update' comment.pk %}">
+      <i class="fa fa-pencil-square-o ml-5  text-muted"   id="editicon"></i>
+    </a>
+    <a href="{% url 'comment_confirm_delete' comment.pk %}?next={{ request.path}}">
+      <i class="fa fa-trash-o ml-5  text-muted" aria-hidden="true"  id="delicon"></i>
+    </a>
+    {% endif %}
+</center>
+
+    </div>
+</div>
+{% if forloop.counter|divisibleby:2 %}</div>
+  <div class="row">
+{% endif %}
+{% if forloop.last %}
+</div>
+{% endif %}
+
+{% endfor %}
+</div>
+<center>
+<a href="{% url 'comment_form' post.slug %}" class="btn btn-md btn-danger my-3 ml-3">Comment</a>
+</center>
+{% endblock %}

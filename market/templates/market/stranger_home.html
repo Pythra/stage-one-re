@@ -1,0 +1,114 @@
+{% extends 'market/base.html' %}
+{% block title %}
+
+       #pic{
+       height:124px; max-width:124px;
+        border:1px; border-radius:13px 13px 0px 0px;
+       margin-top:0px;  background-repeat:no-repeat;
+       background-size:124px; vertical: center;
+       }
+
+
+       #box{border: 1px ;
+            max-height:200px; max-width:125px;
+            padding:0px;
+            border-radius:16px;
+            margin-top:16px;
+            -moz-box-shadow: 5px 5px 5px #777777;
+            -webkit-box-shadow: 5px 5px 5px #777777;
+            box-shadow: 4px 4px 4px #FFB9EE, -5px -5px 5px whitesmoke;
+                }
+        #pname{color:purple;}
+#list-box{   padding:7px; height:auto;
+             border-radius:16px; width: 100%;
+             margin-top:10px;
+             box-shadow: inset 2px 2px 10px #D6D6D6;
+                }
+
+#search-sm{border-radius:24px 0 0 24px; width:80%; border:1px solid dimgray;}
+#search-btn-sm{border-radius:0 24px 24px 0 ;
+            margin-top:3px; border:1px solid dimgray;
+            background-color:bisque; height:24px;}
+
+       #ser-pic{
+       height:116px; max-width:150%;
+        border:1px;
+       margin-top:0px;  background-repeat:no-repeat;
+       background-size:124px;
+       }
+       #ser-box{border: none;
+            max-height:200px; width:100%;
+            padding:3px;
+            border-radius:16px;
+            -moz-box-shadow: 5px 5px 5px #777777;
+            -webkit-box-shadow: 5px 5px 5px #777777;
+            box-shadow: 2px 2px 5px #FFB9EE, -5px -5px 5px whitesmoke;
+
+                }
+#carouselExampleControls{  }
+#carousel-card{width:80%; height:180px; border-radius:26px; }
+#car-pic{
+        float:left;
+        height:180px;
+        border:1px; border-radius:25px 3px 0px 25px;
+        background-repeat:no-repeat;
+       }
+#car-text{ color:white; font-size:24px;}
+#vuebox{border: 1px solid red; height:40px; width:60px; }
+
+
+#carousel-card-sm{width:100%; height:120px; border-radius:26px; }
+#car-pic-sm{
+        float:left;
+        height:120px; max-width:130px;
+        border:1px; border-radius:25px 3px 0px 25px;
+        background-repeat:no-repeat;
+       }
+#car-text-sm{ color:white; font-size:15px;}
+  {% load static %}
+{% endblock %}
+
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  {% load static %}
+        <div id="for_bg">
+                {% block big_carousel %} {% include 'market/big/big_carousel.html' %} {% endblock big_carousel %}
+            </div>
+            <div id="for_sm">
+                {% block small_carousel %} {% include 'market/small/small_carousel.html' %} {% endblock small_carousel %}
+            </div>
+
+    {% if requests %}
+            {% block request_list %}{% include 'market/request_list.html' %}{% endblock %}
+    {% endif %}
+<hr>
+<div id="list-box" class="mb-3">
+    <a href="{% url 'product_form' %}">
+        <i style="position:relative; float:right; font-size:17px; color:dimgray;" class="fa fa-plus-circle"></i>
+    </a>
+    <center id="for_bg">
+        <small style="font-weight:600;"> All products available <br>(Tap on image for full size)</small><br>
+        {% for product in all_products %}
+            {% block product_list %}{% include 'market/stranger/product_list_stranger.html' %}{% endblock %}
+        {% endfor %}
+    </center>
+
+    <center id="for_sm"> <small style="font-weight:600;"> All products available  <br>(Click image for full size)</small><br>
+        {% for product in all_products %}
+            {% block product_list_sm %}{% include 'market/stranger/product_list_sm.html' %}{% endblock %}
+        {% endfor %}
+    </center>
+<hr class="mt-4">
+<center>
+    <small style=" font-weight:600;">All services available</small>
+    <a href="{% url 'service_form' %}">
+        <i style="position:relative; float:right; font-size:17px; color:dimgray;" class="fa fa-plus-circle"></i>
+    </a><br>
+        {% for service in all_services %}
+            {% block service_list %}{% include 'market/stranger/service_list.html' %}{% endblock %}
+        {% endfor %}
+</center>
+</div>
+
+
+{% endblock %}

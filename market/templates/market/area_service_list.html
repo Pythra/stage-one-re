@@ -1,0 +1,115 @@
+<style>
+       #aser-box{border-top:1px solid #D6D6D6;border-left:1px solid #D6D6D6;
+            max-height:210px; width:100%;
+             padding-top:3px;
+            border-radius:16px;
+            box-shadow: 5px 5px 5px grey;
+                }
+    #serlistpic{max-height:55px; margin:2px 2px 2px 0; border-radius:28px;}
+#picscroll {
+  white-space: nowrap; overflow:auto; margin-bottom:0; display:block;
+}
+       </style>
+       {% block area_service_list %}
+
+  {% if forloop.first %}
+    <div class="row">
+  {% endif %}
+  <div class="col-lg-6 col-12">
+    <div id="aser-box"  class="mb-3">
+        <center>
+            <span style="color:purple; margin:1px 0 3px 0; font-size:12px; font-weight: 700;">{{ service.name }}</span><br>
+        </center>
+            {% if service.pic1 or service.pic2 or service.pic3 or service.pic4 %}
+        <div id="picscroll">
+             {% if service.pic1 %}
+                <img src="{{ service.pic1.url }}" id="serlistpic" data-toggle="modal" data-target="#modal{{ service.id }}p1">
+            {% endif %}
+             {% if service.pic2 %}
+                <img src="{{ service.pic2.url }}" id="serlistpic" data-toggle="modal" data-target="#modal{{ service.id }}p2">
+            {% endif %}
+             {% if service.pic3 %}
+                <img src="{{ service.pic3.url }}" id="serlistpic" data-toggle="modal" data-target="#modal{{ service.id }}p3">
+            {% endif %}
+             {% if service.pic4 %}
+                <img src="{{ service.pic4.url }}" id="serlistpic" data-toggle="modal" data-target="#modal{{ service.id }}p4">
+            {% endif %}
+        </div>
+            {% else %}
+            <center style="color:grey;">
+                <span id="for_bg">{{ service.description|slice:":144" }}....</span>
+                <span id="for_sm" style="margin: 1px 3px 1px 3px; font-size:13px;">
+                    {{ service.description|slice:":105" }}
+                </span>
+            </center>
+            {% endif %}
+            <div style="background-color:#FFB9EE; border-radius:0 0 8px 8px; width:100%;" class="mt-2">
+
+                <span style="font-size:12px;">
+                    <span class="mr-2 ml-1">
+                        <b>Area: </b>{{ service.shop.location|capfirst }}
+                    </span>
+                    <b >Charge: </b>${{ service.charge }}
+                    <a href="{% url 'service_detail' service.slug %}" id="more" style="float:right" class="mr-2">
+                        <span style="color:brown;"> read more  </span>
+                    </a>
+                </span>
+            </div>
+    </div>
+    </div>
+{% if forloop.counter|divisibleby:2 %}
+    </div>
+  <div class="row">
+{% endif %}
+{% if forloop.last %}
+</div>
+{% endif %}
+{% endblock %}
+
+<!-- Modal -->
+{% if service.pic1 %}
+<div class="modal fade" id="modal{{ service.id }}p1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    <img src="{{service.pic1.url}}"  style="max-width:100%">
+
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- Modal -->
+{% if service.pic2 %}
+<div class="modal fade" id="modal{{ service.id }}p2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    <img src="{{service.pic2.url}}"  style="max-width:100%">
+
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- Modal -->
+{% if service.pic3 %}
+<div class="modal fade" id="modal{{ service.id }}p3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    <img src="{{service.pic3.url}}"  style="max-width:100%">
+
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% if service.pic4 %}
+<!-- Modal -->
+<div class="modal fade" id="modal{{ service.id }}p4" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    <img src="{{service.pic4.url}}"  style="max-width:100%">
+
+    </div>
+  </div>
+</div>
+{% endif %}

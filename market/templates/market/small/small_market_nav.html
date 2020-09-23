@@ -1,0 +1,31 @@
+<style>
+
+#search-sm{border-radius:24px 0 0 24px; width:80%; border:1px solid dimgray;}
+#search-btn-sm{border-radius:0 24px 24px 0 ;
+            margin-top:3px; border:1px solid dimgray;
+            background-color:bisque; height:24px;}
+#navicons-sm{ height:77px; width:100%; padding:3px; border-bottom:1px solid #E0BDB7; overflow:scroll; white-space:nowrap;
+                line-spacing:0.4em;}
+#top-icon-sm{font-size:22px; color:dimgray; margin-right:69px;}
+#lasticon-sm{font-size:26px; color:dimgray;}
+</style>
+{% block small_market_nav %}
+        <div id="navicons-sm"  >
+            <center>
+
+                    <a href="{% url 'my_shop' %}">
+                        <i class="fa fa-user-circle-o " id="top-icon-sm" ></i>
+                    </a>
+                    <i class="fa fa-envelope-o" id="top-icon-sm"></i>
+                    <i class="fa fa-bell-o" id="top-icon-sm"></i>
+                    <a href="{% url 'settings' %}">
+                        <i class="fa fa-gear" id="lasticon-sm"></i>
+                    </a><br>
+                <form action="{% url 'search_home' %}" method="get" class="mt-2">
+                    <input type="search" name="q" id="search-sm"><button id="search-btn">
+                <i class="fa fa-search" style="color:brown;"></i>
+            </button>
+                </form>
+            </center>
+        </div>
+{% endblock %}

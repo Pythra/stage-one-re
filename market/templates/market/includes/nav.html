@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Bootstrap 4 Fluid Layout Example</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Baloo+Da+2" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<style>
+  #navmain{ color: black ; font-size:22px; opacity:0.8; margin-right}
+  .navbar-brand{color:brown ; font-family:Ebrima; margin-left:10px;}
+
+  #sour{color: black; font-family: Candara; font-size:42px; font-weight:500; }
+  #milk{color: brown ;font-family: 'Comic sans ms'; font-weight:600; font-size:37px;}
+  #daily{color: black; font-family: Candara; font-size:40px; font-weight:360;}
+  #cupicon{ font-size:48px; opacity:0.7 width:50px;  color:brown ;}
+#signup{ font-family:"baloo da 2"; color:white; font-weight: 500; font-size:17px;}
+#login{ font-size:17px; color: brown;}
+
+#scroll{color: white ; font-size:20px;font-family:"baloo da 2";}
+ .scrollmenu {
+  background-color: brown; height:31px;
+  overflow: auto; overflow-y: hidden;
+  white-space: nowrap;
+}
+
+@media( max-width:768px)
+{
+  #sour{color: black; font-family: "comic sans ms"; font-size:22px; font-weight:500; }
+  #milk{color: brown ;font-family: 'Comic sans ms'; font-weight:600; font-size:24px;}
+  #daily{color: black; font-family: Candara; font-size:27px; font-weight:360;}
+  #cupicon{  font-size:33px; color:brown ;}
+  .navbar-brand{color:brown ; font-family:Ebrima;}
+#scroll{color: white ; font-size:17px;}
+.navbar-custom{height:61px;}
+ .scrollmenu {
+  background-color: brown; height:27px;
+  overflow: auto; overflow-y: hidden;
+  white-space: nowrap;
+  }}
+  </style>
+  </head>
+  <body>
+<nav class="navbar navbar-expand-md navbar-light navbar-custom" style="background-color: bisque;" >
+    <a href="{% url 'home' %}" class="navbar-brand">
+      <i class=" fa fa-globe mr-0" id="cupicon"></i><span id="sour">Milk</span><span id="milk">Town</span>
+        <span id="daily" class="ml-1">Market</span>
+    </a>
+    <div id="for_sm">
+        <i class="fa fa-bars" style="font-size:25px;" data-toggle="modal" data-target="#modal{{ navlist }}" ></i>
+    </div>
+        <div class="navbar-nav ml-5" id="for_bg">
+            <a href="{% url 'home' %}" class="nav-item nav-link active" id="navmain">Home</a>
+            <a href="{% url 'about'%}" class="nav-item nav-link" id="navmain">About Us</a>
+            <a href="#" class="nav-item nav-link" id="navmain">Upcoming</a>
+            <a href="#" class="nav-item nav-link" id="navmain">Memeverse</a>
+        </div>
+            <div class="navbar-nav ml-auto" id="for_bg">
+
+            {% if user.is_authenticated %}
+            <a href="{% url 'logout'%}?next={{ request.path}}" class="nav-item nav-link btn btn-sm btn-outline-dark" >Logout</a>
+            {% else %}
+
+            <a href="{% url 'login'%}?next={{ request.path}}" class="nav-item nav-link btn btn-sm" id="login">Login</a>
+            <a href="{% url 'signup'%}" class="nav-item nav-link text-muted">
+                <button class="btn btn-secondary btn-sm"><span id="signup">Sign up</span></button></a>
+            {% endif %}
+            </div>
+
+</nav>
+<div class="scrollmenu mx-auto">
+<center>
+    <a href="{% url 'home' %}" id="scroll" class="mx-3 ">Blog</a>
+  <a href="{% url 'market_home' %}" id="scroll" class="mx-3">Market</a>
+  <a href="#about" id="scroll" class="mx-3">Advertise</a>
+</center>
+</div>
+</body>
+
+</html>
+
+<!-- Modal -->
+<div class="modal fade" id="modal{{ navlist }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog" role="document">
+    <div class="modal-content" style="width:62%; float:right;margin-top:80px;">
+        <center>
+    <ul class="list-group">
+            {% if user.is_authenticated %}
+        <li class="list-group-item">
+            <a href="{% url 'logout'%}?next={{ request.path}}" class="nav-item nav-link btn btn-sm btn-outline-dark" >Logout</a>
+        </li>
+            {% else %}
+
+        <li class="list-group-item">
+            <a href="{% url 'login'%}?next={{ request.path}}" style="color:black">Login</a>
+        </li>
+        <li class="list-group-item">
+            <a href="{% url 'signup'%}" style="color:black;">
+                Sign up
+            </a>
+        </li>
+            {% endif %}
+    </ul>
+        </center>
+    </div>
+  </div>
+</div>

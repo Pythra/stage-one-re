@@ -1,0 +1,14 @@
+{% extends 'market/base.html' %}
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+            <h4>Edit your market profile</h4>
+        <form method="post" enctype = "multipart/form-data">
+          {% csrf_token %}
+            {{ form.as_p }}
+          <button class="btn btn-info mt-3" type="submit" id="#widmob">Update</button>
+        </form>
+
+{% endblock %}

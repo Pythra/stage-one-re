@@ -1,0 +1,96 @@
+{% extends 'milk/base.html' %}
+{% block title %}
+
+
+@media( min-width:768px)
+{#postpic {float:left:}
+ #comment_box{width: 60%;}}
+
+
+@media( max-width:768px)
+{#postpic {float:center;}
+      #comment{width:100%;}
+        #commenter{font-size:10px;}
+      }
+
+#replybtn{float: right;
+    font-weight:bold;
+    margin-right: 10px;
+    font-family:"baloo da 2";
+    color: brown;}
+
+.dp{
+    background-size: cover;
+    height:30pt;width:30pt;
+    margin:0px 5px 3px 3px;
+     float:left;border-radius:50%;
+    -moz-border-radius: 100px;
+    -webkit-border-radius: 100px;}
+
+#postpic{ max-width: auto ; max-height:300px;}
+
+.text-end{float:right;}
+
+#commenter{font-size:20px;
+                margin-left:3px;
+                text-transform:capitalize;
+                 color: brown;}
+
+#comment_box{margin-top:10px;
+                        border:1px solid #C8C8C8;
+                        padding:10px;
+                        border-radius:20px;
+                -moz-box-shadow: 5px 5px 5px #777777;
+                -webkit-box-shadow: 5px 5px 5px #777777;
+                box-shadow: 5px 5px 5px #CBCBCB, -5px -5px 5px whitesmoke;
+      }
+
+#creator{text-transform:uppercase; color: red;}
+
+#combody{ line-height: 1.4em; color:grey;
+                }
+#comicon{font-size:26px; opacity:0.7;}
+#hearticon{font-size:23px; opacity:0.7;}
+#comment_time{float: right;font-family:"baloo da 2"}
+  #title{ font-family:"zcool xiaowei"}
+
+#replyform{ margin-top:20%;}
+{% endblock %}
+{% block content %}
+
+<div class="container">
+    <div id="comment_box">
+                <img class="dp" src="{{ comment.dp }}">
+                <p id="commenter">{{ comment.name }}
+                <small class="text-muted " id="comment_time"><i class=" fa fa-clock-o"></i> {{ comment.created_on }}</small>
+                </p>
+            <hr>
+
+            <p id="combody">{{ comment.body }}</p>
+
+            <i class="fa fa-heart-o ml-1" id="hearticon" aria-hidden="true"></i>
+            <i class="fa fa-comments-o ml-5 "  id="comicon"><sup><small>{{comment.replies.count}}</small></sup></i>
+
+</div>
+    {% for reply in replies %}
+    <div id="comment_box">
+                <img class="dp" src="{{ reply.dp }}">
+                <p id="commenter">{{ reply.name }}<small class="ml-3">replied</small>
+                </p>
+            <hr>
+
+            <p id="combody">{{ reply.body }}</p>
+
+            <i class="fa fa-heart-o ml-1" id="hearticon" aria-hidden="true"></i>
+            <i class="fa fa-comments-o ml-5 "  id="comicon"></i>
+</div>
+    {% endfor %}
+<form method="post" >
+{% csrf_token %}
+    <div id="replyform">
+{{form}}
+    </div>
+    <button type="submit" class="btn btn-md btn-danger btn-mobile-wide my-3"> reply</button>
+</form>
+</div>
+{% endblock %}

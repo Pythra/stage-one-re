@@ -1,0 +1,14 @@
+{% extends 'market/base.html' %}
+{% block title %}
+{% endblock %}
+{% block content %}
+<center><h6>Delete Item?</h6></center>
+
+<p>Are you sure you want to delete this item?<br>{{ product }}</p>
+
+<form action="" method="POST" class="form-group">
+  {% csrf_token %}
+  <input type="submit" value="Yes, delete." class="form-control">
+   <input type="hidden" name="next" value="{{ next }}" />
+</form>
+{% endblock %}

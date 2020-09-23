@@ -1,0 +1,43 @@
+{% extends 'milk/base.html' %}
+{% block title %}
+#signupbox{max-width:280px; border-radius: 20px;padding:30px 30px 5px 30px;margin-top:6px;
+                        border:1px solid #C8C8C8;
+                        padding:10px;
+                        border-radius:20px;
+                -moz-box-shadow: 5px 5px 5px #777777;
+                -webkit-box-shadow: 5px 5px 5px #777777;
+                box-shadow: 5px 5px 5px #CBCBCB, -5px -5px 5px whitesmoke;}
+  #sourup{color: black; font-family: "comic sans ms"; font-size:24px; font-weight:500; }
+  #milkup{color: brown ;font-family: 'Comic sans ms'; font-weight:600; font-size:25px;}
+#cupup{  font-size:40px; color:brown ;}
+#username{margin-bottom:0px;}
+{% endblock %}
+{% block content %}
+<center>
+<h2>Quick sign up</h2>
+<div class="" id="signupbox">
+<form method="post" >
+{% csrf_token %}
+
+    <center><i class="fa fa-coffee" id="cupup"></i> <br>
+        Signup to join <span id="sourup">Sour</span><span id="milkup">Milk</span><br>
+</center>
+        <hr>
+      {% for field in form %}
+        {% for error in field.errors %}
+          <small style="color: red">{{ error }}</small>
+        {% endfor %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% if field.help_text %}
+          <small>{{ field.help_text }}</small>
+        {% endif %}
+      </p>
+      {% endfor %}
+
+  <button type="submit" class="btn btn-md btn-danger">Sign up</button>
+</form>
+</div>
+</center>
+{% endblock %}

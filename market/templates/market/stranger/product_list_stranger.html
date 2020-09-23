@@ -1,0 +1,29 @@
+{% block product_list %}
+  {% if forloop.first %}
+    <div class="row">
+  {% endif %}
+
+  <div class="col-lg-2">
+      <center>
+        <div id="box">
+            <div id="pic" style="background-image:url('{{ product.pic1.url }}')"></div>
+            <small >
+                <strong id="pname">{{ product.name }}</strong><br>
+                    &#8358;{{ product.price }} | {{ product.shop.location }}
+                    <br>
+                <a href="{% url 'product_detail' product.slug %}" id="more" ">
+                    read more
+                </a>
+            </small>
+        </div>
+      </center>
+  </div>
+{% if forloop.counter|divisibleby:6 %}
+    </div>
+
+  <div class="row">
+{% endif %}
+{% if forloop.last %}
+</div>
+    {% endif %}
+{% endblock %}

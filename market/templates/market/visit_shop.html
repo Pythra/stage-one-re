@@ -1,0 +1,77 @@
+
+{% extends 'market/base.html' %}
+{% block title %}
+#est_pic{ max-width:100%; height:auto;}
+
+       #mypic{
+       height:124px; max-width:124px;
+        border:1px; border-radius:13px 13px 0px 0px;
+       margin-top:0px;  background-repeat:no-repeat;
+       background-size:124px;
+       }
+
+#est_pic{
+       max-height:280px;
+        background-repeat:no-repeat;
+        border-radius: 13px;
+
+              }
+       #mybox{border: 1px ;
+            height:210px; max-width:125px;
+            padding:0px;
+            border-radius:16px;
+            margin-top:16px;
+            -moz-box-shadow: 5px 5px 5px #777777;
+            -webkit-box-shadow: 5px 5px 5px #777777;
+            box-shadow: 4px 4px 4px bisque, -5px -5px 5px whitesmoke;
+                }
+#myheader{ border-top:1px; width: 100%;color:purple; marging-top:10px;
+            -moz-box-shadow: 5px 5px 5px #777777;
+            -webkit-box-shadow: 5px 5px 5px #777777;
+            box-shadow: -5px -5px 5px whitesmoke;
+}
+{% endblock %}
+
+{% block content %}
+<center>
+          <img id="est_pic" src="{{ user.shop.establishment_pic.url }}" class="mt-3"><br>
+    <h5 class="my-3"> Welcome to {{ user.shop.name|capfirst }}</h5>
+    <p>{{ user.shop.location.LGA|capfirst }} LGA,
+        {{ user.shop.location.state|capfirst }} state,
+        {{ user.shop.location.area|capfirst }}.</p>
+    <small class="text-muted">STATS</small>
+    <p>sales: {{ user.shop.sales }}</p>
+
+
+<hr>
+
+<h6 style="color:brown;" class="mt-5">Items for sale</h6>
+    </center>
+        {% for product in products %}
+          {% if forloop.first %}
+            <div class="row">
+          {% endif %}
+
+          <div class="col-lg-2 col-4">
+
+
+        <center>
+            <div id="mybox">
+                <div id="mypic" style="background-image:url('{{ product.picture.url }}')"></div>
+                <small><strong id="pname" style="color:brown;">{{ product.name }}</strong><br>
+                <b>Price: </b>&#8358;{{ product.price }}<br>
+                <a href="{% url 'product_detail' product.slug %}" id="more">read more</a></small>
+            </div>
+        </center>
+
+
+          </div>
+        {% if forloop.counter|divisibleby:3 %}
+            </div>
+          <div class="row">
+        {% endif %}
+        {% if forloop.last %}
+        </div>
+        {% endif %}
+        {% endfor %}
+{% endblock %}

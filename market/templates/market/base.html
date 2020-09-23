@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>MilkMarket Homepage</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Baloo+Da+2" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<style>
+{% block title %}{% endblock %}
+.col-lg-9{
+    border-left:1px solid #E0BDB7; height:100%;
+        }
+
+
+@media( min-width:768px)
+{
+#for_sm{display:none;}
+}
+
+
+@media( max-width:768px)
+{
+#search-input-sm{width:270px; border-radius:24px 0 0 24px ;
+                 border:1px solid dimgray;
+                 height:22px; border-right:none;
+#search-btn{border-radius:0 24px 24px 0 ; border:1px solid dimgray; background-color:bisque; height:18px;}}
+#for_bg{display:none;}
+#sidead{ display: none;}
+#widmob{width:100%;}
+#bellicon{font-size:19px; color:black; margin-top:13px;}
+#usericon{font-size:19px; color:black;}
+}
+#navicons{ height:80px; width:100%; padding:15px; border-bottom:1px solid #E0BDB7;}
+#top-icon{font-size:25px; color:dimgray; margin-top:10px;}
+#lasticon{font-size:29px; color:dimgray;}
+#search-input{width:450px; border-radius:24px 0 0 24px ; border:1px solid dimgray; border-right:none;}
+#search-btn{border-radius:0 24px 24px 0 ; border:1px solid dimgray; background-color:bisque;}
+#widmob{ width:100%}
+.footer{height:120px; background-color:black; color:white; margin-top:50px;}
+.picscroll {
+  overflow: auto; overflow-y: hidden;
+  white-space: nowrap;
+}
+html, body{height:100%}
+   </style>
+  {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'market/style.css' %}">
+</head>
+<body class="mb-5">
+  {% load static %}
+{% include 'market/includes/nav.html' %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3" id="sidead">
+            <div class="container">
+                {% block sidebar %} {% include 'market/includes/sidebar.html' %} {% endblock sidebar %}
+            </div>
+        </div>
+        <div class="col col-lg-9">
+            <div id="for_bg">
+                {% block big_market_nav %} {% include 'market/big/big_market_nav.html' %} {% endblock big_market_nav %}
+            </div>
+            <div id="for_sm">
+                {% block small_market_nav %} {% include 'market/small/small_market_nav.html' %} {% endblock small_market_nav %}
+            </div>
+                {% block content %} {% endblock %}
+        </div>
+    </div>
+</div>
+</body>

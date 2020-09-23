@@ -1,0 +1,35 @@
+<style>
+    #shop-card{ height:300px; width:220px;
+            box-shadow: 4px 4px 4px  purple, -5px -5px 5px whitesmoke; margin-bottom:15px;
+            padding:3px; background-color: #FFB9EE; border-radius:20px;
+  white-space: nowrap;display:block;}
+
+ .crollmenu {
+  overflow: auto; overflow-y: hidden;
+  white-space: nowrap;
+}
+#card-pic{height:200px; width:205px;
+            border-radius: 60%; background-size:250px;
+            background-repeat: no-repeat; margin:3px;
+            border: 3px solid purple;}
+#visit{background-color: purple; border-radius:8px; height:22px; width:60%; color:white; border:none; margin-top:8px;
+        letter-spacing:0.1em; font-weight:740px;}
+</style>
+{% block service_list %}
+        <center>
+    <div class="crollmenu">
+    <div id="shop-card" >
+        <div id="card-pic" style="background-image:url('{{ shop.establishment_pic.url }}')" ></div>
+            <small>
+                <strong>{{ shop.name|upper }}</strong><br>
+                <em>{{ shop.location.area|capfirst }}  {{ shop.location.LGA|capfirst }}  {{ shop.location.state|capfirst }}</em><br>
+                <a href="{% url 'visit_shop' shop.id %}">
+                    <button id="visit" style="">
+                        Visit shop
+                    </button>
+                </a>
+            </small>
+    </div>
+    </div>
+        </center>
+{% endblock %}

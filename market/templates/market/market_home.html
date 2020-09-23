@@ -1,0 +1,166 @@
+{% extends 'market/base.html' %}
+{% block title %}
+
+       #pic{ height:124px; max-width:124px;
+        border:1px; border-radius:13px 13px 0px 0px;
+       margin-top:0px;  background-repeat:no-repeat;
+       background-size:124px; vertical: center;
+       }
+
+
+       #box{border: 1px ;
+            max-height:200px; max-width:125px;
+            padding:0px;
+            border-radius:16px;
+            margin-top:16px;
+            -moz-box-shadow: 5px 5px 5px #777777;
+            -webkit-box-shadow: 5px 5px 5px #777777;
+            box-shadow: 4px 4px 4px #FFB9EE, -5px -5px 5px whitesmoke;
+                }
+        #pname{color:purple;}
+#list-box{   padding:7px; height:auto;
+             border-radius:16px; width: 100%;
+             margin-top:10px;
+                }
+
+
+       #ser-pic{
+       height:116px; max-width:150%;
+        border:1px;
+       margin-top:0px;  background-repeat:no-repeat;
+       background-size:124px;
+       }
+#carouselExampleControls{  }
+#carousel-card{width:80%; height:180px; border-radius:26px; }
+#car-pic{
+        float:left;
+        height:180px;
+        border:1px; border-radius:25px 3px 0px 25px;
+        background-repeat:no-repeat;
+       }
+#car-text{ color:white; font-size:24px;}
+#vuebox{border: 1px solid red; height:40px; width:60px; }
+
+
+#carousel-card-sm{width:100%; height:120px; border-radius:26px; }
+#car-pic-sm{
+        float:left;
+        height:120px; max-width:130px;
+        border:1px; border-radius:25px 3px 0px 25px;
+        background-repeat:no-repeat;
+       }
+#car-text-sm{ color:white; font-size:15px;}
+  .infoHandle{
+  overflow: auto; overflow-y: hidden;
+  white-space: nowrap; display:block
+}
+  {% load static %}
+{% endblock %}
+
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  {% load static %}
+        <div id="for_bg">
+                {% block big_carousel %} {% include 'market/big/big_carousel.html' %} {% endblock big_carousel %}
+            </div>
+            <div id="for_sm">
+                {% block small_carousel %} {% include 'market/small/small_carousel.html' %} {% endblock small_carousel %}
+            </div>
+    {% if requests %}
+            {% block request_list %}{% include 'market/request_list.html' %}{% endblock %}
+    {% endif %}
+<div id="list-box" class="mb-3 mt-3">
+    <a href="{% url 'product_form' %}">
+        <i style="position:relative; float:right; font-size:17px; color:dimgray;" class="fa fa-plus-circle"></i>
+    </a>
+    <center id="for_bg"> <small style="font-weight:600;">Products in your area </small>
+     <br>
+{% if area_products %}
+    {% for area_product in area_products %}
+        {% block product_list %}{% include 'market/big/product_list.html' %}{% endblock %}
+    {% endfor %}
+{% else %}
+     <small class="text-muted">Be the first to sell an item in your area</small>
+{% endif %}
+</center>
+
+    <center id="for_sm"><small style="font-weight:600;">Products in your area</small><br>
+{% if area_products %}
+    {% for area_product in area_products %}
+        {% block product_list_sm %}{% include 'market/small/product_list_sm.html' %}{% endblock %}
+    {% endfor %}
+<a href="{% url 'all_area_products' %}">see more</a>
+{% else %}
+     <small class="text-muted">Be the first to sell an item in your area</small>
+{% endif %}
+</center>
+<hr class="mt-4">
+<center><small style=" font-weight:600;">Services in your area</small>
+    <a href="{% url 'service_form' %}">
+        <i style="position:relative; float:right; font-size:17px; color:dimgray;" class="fa fa-plus-circle"></i>
+    </a><br>
+{% if area_services %}
+    {% for service in area_services %}
+        {% block area_service_list %}{% include 'market/area_service_list.html' %}{% endblock %}
+    {% endfor %}
+<a href="{% url 'all_area_services' %}">see more</a>
+{% else %}
+   <small class="text-muted">Be the first to render a service in your area</small>
+{% endif %}</center>
+</div>
+
+<div style="display:none;">
+{% if new_shops %}
+<center><h6>New shops around you</h6></center>
+    {% for shop in new_shops %}
+        {% block shop_list %}{% include 'market/shop/area_shop_list.html' %}{% endblock %}
+    {% endfor %}
+<small>
+<a href="{% url 'all_area_shops' %}">see more</a>
+</small>
+{% endif %}
+</div>
+
+<center>
+    <div style="border: 2px dashed red; width:95%; height:140px;" class="my-4">
+        <p class="my-4">ADVERTISEMENT</p>
+    </div>
+</center>
+
+<div id="list-box">
+    <center id="for_bg"><small style="color:; font-weight:600;">Products in your state</small><br>
+    {% if state_products %}
+{% for state_product in state_products %}
+    {% block state_product_list %}{% include 'market/big/state_product_list.html' %}{% endblock %}
+{% endfor %}
+<a href="{% url 'all_state_products' %}">see more</a>
+    {% else %}
+        <small class="text-muted">Be the first to sell an item in your state</small>
+    {% endif %}
+    </center>
+
+    <center id="for_sm"><small style=" font-weight:600;">Products in your state</small><br>
+{% if state_products %}
+    {% for state_product in state_products %}
+        {% block state_product_list_sm %}{% include 'market/small/state_product_list_sm.html' %}{% endblock %}
+    {% endfor %}
+<a href="{% url 'all_state_products' %}">see more</a>
+{% else %}
+     <small class="text-muted">Be the first to sell an item in your area</small>
+{% endif %}
+</center>
+
+<hr class="mt-4">
+    <center>
+        <small style=" font-weight:600;">Services in your state</small>
+    </center><br>
+{% if state_services %}
+    {% for service in state_services %}
+        {% block state_service_list %}{% include 'market/state_service_list.html' %}{% endblock %}
+    {% endfor %}
+<a href="{% url 'all_state_services' %}">see more</a>
+{% else %}
+    <center><small class="text-muted">Be the first to render a service in your state</small></center>
+{% endif %}
+</div>
+{% endblock %}

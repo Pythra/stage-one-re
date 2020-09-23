@@ -1,0 +1,37 @@
+{% extends 'market/base.html' %}
+{% block title %}
+    #pro-pic-sm{
+       height:104px; width:104px;
+        border:1px; border-radius:13px 13px 0px 0px;
+       margin-top:0px;  background-repeat:no-repeat;
+       background-size:104px;
+       }
+
+
+       #box-sm{border: 1px ;
+            max-height:180px; max-width:105px; overflow:scroll;
+            padding:0px;
+            border-radius:13px;
+            margin-top:13px;
+            -moz-box-shadow: 5px 5px 5px #777777;
+            -webkit-box-shadow: 5px 5px 5px #777777;
+            box-shadow: 4px 4px 5px #FFC58B, -5px -5px 5px whitesmoke;
+                }
+
+{% endblock %}
+{% block content %}
+{% for product in products %}
+    {% block searched_products %}{% include 'market/search/searched_products.html' %}{% endblock searched_products %}
+{% endfor %}
+<br>
+<br>
+{% for service in services %}
+    {% block searched_services %}{% include 'market/search/searched_services.html' %}{% endblock searched_services %}
+{% endfor %}
+    <center class="mt-2">
+        <small class="text-muted">Didn't find what you were looking for?<br></small>
+    <a href="{% url 'request_form' %}">
+        <small>Click to make a request.</small>
+    </a>
+    </center>
+{% endblock %}

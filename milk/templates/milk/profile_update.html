@@ -1,0 +1,16 @@
+{% extends 'milk/base.html' %}
+{% block title %}
+{% endblock %}
+{% block content %}
+<div class="col-lg-6">
+        <img class="my-4" src="{{ request.user.profile.dp.url }}">
+        <form method="post" enctype = "multipart/form-data">
+          {% csrf_token %}
+            {{ u_form.as_p }}
+
+            {{ p_form.as_p }}
+
+          <button class="btn btn-info mt-3" type="submit">Update</button>
+        </form>
+</div>
+    {% endblock %}

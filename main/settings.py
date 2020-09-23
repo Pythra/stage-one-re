@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['milktown.herokuapp.com', 'localhost']
 
 INSTALLED_APPS = [
     'chat',
+    'pillow',
     'market.apps.MarketConfig',
     'milk.apps.MilkConfig',
     'django.contrib.admin',

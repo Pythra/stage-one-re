@@ -30,7 +30,6 @@ ALLOWED_HOSTS = ['milktown.herokuapp.com', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
-    'channels',
     'chat',
     'market.apps.MarketConfig',
     'milk.apps.MilkConfig',
